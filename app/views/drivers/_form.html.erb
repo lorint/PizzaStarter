@@ -1,4 +1,19 @@
 <%= form_for @driver do |f| %>
 	Name: <%= f.text_field :name %>
+	Email: <%= f.text_field :email %>
+	Password: <%= f.password_field :password %>
+	<br />
+
+		<!-- Let's put the fields for availabilities here -->
+		<%= f.fields_for :availabilities do |builder| %>
+				<%= builder.select :day_of_week, day_array(builder.object.new_record?), {}, {class: "dayDropDown"} %>
+			<%= builder.select :start_hour, hour_array(builder.object.new_record?) %> -
+			<%= builder.select :end_hour, hour_array(builder.object.new_record?) %>
+			<% if !builder.object.new_record? %>
+				<%= link_to "X", driver_availability_path(@driver, builder.object.id), {method: :delete} %>
+			<% end %>
+			<br />
+		<% end %>
+
 	<%= f.submit %>
 <% end %>

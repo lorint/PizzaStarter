@@ -1,6 +1,8 @@
 class AvailabilitiesController < ApplicationController
+  before_action :set_driver
+
   def index
-    @availabilities = Availability.all
+    @availabilities = @driver.availabilities
   end
 
   def new
@@ -8,8 +10,8 @@ class AvailabilitiesController < ApplicationController
   end
 
   def create
-    Availability.create(availability_params)
-    redirect_to availabilities_path
+    @driver.availabilities.create(availability_params)
+    redirect_to driver_availabilities_path(@driver)
   end
 
   def edit
@@ -19,16 +21,23 @@ class AvailabilitiesController < ApplicationController
   def update
     a = Availability.find(params[:id])
     a.update(availability_params)
-    redirect_to availabilities_path
+    redirect_to driver_availabilities_path(@driver)
   end
 
   def destroy
-    Availability.destroy(params[:id])
-    redirect_to availabilities_path
+    a = Availability.find(params[:id])
+    a.destroy
+    redirect_to driver_availabilities_path(@driver)
   end
 
 private
   def availability_params
     params.require(:availability).permit(:day_of_week, :start_hour, :end_hour)
   end
+
+  def set_driver
+    @driver = Driver.find(params[:driver_id])
+  end
 end
+
+

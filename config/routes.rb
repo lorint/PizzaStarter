@@ -1,8 +1,17 @@
 PizzaDelivery::Application.routes.draw do
+  get "sessions/new"
   root 'drivers#index'
- 
-  resources :drivers
-  resources :availabilities
+
+  resource :sessions, only: [:new, :create, :destroy]
+
+  # Here's an example of nested routes
+  resources :drivers do
+    # Not shown  here is adding , shallow: true
+    # which simplifies a little the kinds of routes that are being built
+    resources :availabilities
+  end
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

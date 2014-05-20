@@ -4,7 +4,7 @@
 <% @drivers.each do |d| %>
 	<li>
 		<%= link_to d.name, edit_driver_path(d) %>
-		<%= link_to "Availabilities", availabilities_path %>
+		<%= link_to "Availabilities", driver_availabilities_path(d) %>
 	</li>
 <% end %>
 </ul>

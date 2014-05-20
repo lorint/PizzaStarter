@@ -7,4 +7,10 @@ class ApplicationController < ActionController::Base
 
   include ApplicationHelper
 
+  def authenticate_user
+    if !self.current_user
+      redirect_to new_sessions_path
+    end
+  end
+
 end

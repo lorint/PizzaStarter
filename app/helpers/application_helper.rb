@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def current_user
+    @current_user ||= session[:remember_token] && Driver.find(session[:remember_token])
+  end
+
 	def hour_friendly(hourNum)
 		ret = hourNum % 12
 		(ret == 0 ? "12" : ret.to_s) + ((hourNum % 24) < 12 ? "AM" : "PM")

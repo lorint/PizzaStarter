@@ -8,6 +8,16 @@
 </head>
 <body>
 
+<% if !current_user %>
+  <%= link_to "Sign Up", new_driver_path %>
+  <%= link_to "Log In", new_sessions_path %>
+<% else %>
+  Hello, <%= current_user.name %>
+  <%= link_to "Log Out", sessions_path, :method => :delete %>
+<% end %>
+
+<hr />
+
 <%= yield %>
 
 </body>
