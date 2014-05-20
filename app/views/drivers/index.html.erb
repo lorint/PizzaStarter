@@ -1,0 +1,10 @@
+<h1>Drivers#index</h1>
+
+<ul>
+<% @drivers.each do |d| %>
+	<li>
+		<%= link_to d.name, edit_driver_path(d) %>
+		<%= link_to "Availabilities", availabilities_path %>
+	</li>
+<% end %>
+</ul>

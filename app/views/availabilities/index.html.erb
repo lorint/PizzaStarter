@@ -1,0 +1,12 @@
+<h1>Availabilities#index</h1>
+
+<ul>
+<% @availabilities.each do |a| %>
+	<li>
+		<%= link_to edit_availability_path(a) do %>
+			<%= Date::DAYNAMES[a.day_of_week] %>,
+			<%= hour_friendly(a.start_hour) %> - <%= hour_friendly(a.end_hour) %>
+		<% end %>
+	</li>
+<% end %>
+</ul>
